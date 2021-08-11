@@ -25,6 +25,7 @@ class App extends Component {
         <FormularioCadastro
           aoEnviar={aoEnviarForm}
           testeConsole={testeConsoleApp}
+          validarCpf={validarCpf}
         />
 
       </Container>
@@ -39,6 +40,14 @@ function aoEnviarForm(dados) {
 
 function testeConsoleApp() {
   console.log('testeConsole');
+}
+
+function validarCpf(cpf) {
+  if (cpf.length !== 11) {
+    return { valido: false, textoAjuda: 'CPF deve ter 11 dígitos.' };
+  } else {
+    return { valido: true, textoAjuda: '' };
+  }
 }
 
 export default App;
