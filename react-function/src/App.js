@@ -22,12 +22,23 @@ class App extends Component {
           Formulário de Cadastro
         </Typography>
 
-        <FormularioCadastro />
+        <FormularioCadastro
+          aoEnviar={aoEnviarForm}
+          testeConsole={testeConsoleApp}
+        />
 
       </Container>
 
     );
   }
+}
+
+function aoEnviarForm(dados) {
+  console.log(dados);
+}
+
+function testeConsoleApp() {
+  console.log('testeConsole');
 }
 
 export default App;

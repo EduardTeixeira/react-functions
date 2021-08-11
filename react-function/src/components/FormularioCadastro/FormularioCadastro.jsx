@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { Button, FormControlLabel, TextField, Switch } from '@material-ui/core';
 
-function FormularioCadastro() {
+function FormularioCadastro({ aoEnviar, testeConsole }) {
 
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(false);
 
     return (
 
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log(nome, sobrenome);
+                aoEnviar({ nome, sobrenome, cpf, promocoes, novidades })
+                testeConsole();
             }}
         >
 
@@ -24,8 +28,8 @@ function FormularioCadastro() {
                 value={nome}
                 onChange={event => {
                     let tmpNome = event.target.value;
-                    if (tmpNome.length >= 3) {
-                        tmpNome = tmpNome.substr(0, 3);
+                    if (tmpNome.length >= 12) {
+                        tmpNome = tmpNome.substr(0, 12);
                     }
                     setNome(tmpNome);
                 }}
@@ -49,6 +53,10 @@ function FormularioCadastro() {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                value={cpf}
+                onChange={event => {
+                    setCpf(event.target.value);
+                }}
             />
 
             <FormControlLabel
@@ -56,8 +64,11 @@ function FormularioCadastro() {
                 control={
                     <Switch
                         name="promocoes"
-                        defaultChecked
+                        checked={promocoes}
                         color="primary"
+                        onChange={(event) => {
+                            setPromocoes(event.target.checked);
+                        }}
                     />
                 }
             />
@@ -67,8 +78,11 @@ function FormularioCadastro() {
                 control={
                     <Switch
                         name="novidades"
-                        defaultChecked
+                        checked={novidades}
                         color="primary"
+                        onChange={(event) => {
+                            setNovidades(event.target.checked);
+                        }}
                     />
                 }
             />
